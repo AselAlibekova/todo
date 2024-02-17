@@ -19,7 +19,7 @@ const PORT =process.env.PORT || 3000
 
 connectMongodb()
     .then(() =>{
-        server.listen(PORT, () => console.log(`Server running on PORT ${PORT}`))
+        server.listen(PORT, () => console.log(`Server running on PORT http://localhost:${PORT}`))
     })
     .catch((error)=>{
         console.error("Failed to connect to the Mongodb",error)
