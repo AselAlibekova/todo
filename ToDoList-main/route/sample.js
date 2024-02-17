@@ -64,10 +64,11 @@ router.get('/checkEmailUnique/:email', async (req, res) => {
 
 router.post("/postTask", async (req, res) => {
     try {
-        const { title, content, difficulty, isCompleted,userId } = req.body
-        const tasks = await createTask(title, content, difficulty, isCompleted,userId)
+        const { title, content, isCompleted,userId } = req.body
+        console.log(userId)
+        const tasks = await createTask(title, content, isCompleted,userId)
 
-        res.status(200).json({ message: 'Task created succesfully', tasks })
+        res.status(200).json()
     }
     catch (error) {
         console.error('Error when create a task', error)
