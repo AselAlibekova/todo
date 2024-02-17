@@ -151,16 +151,7 @@ function cancelBtn() {
 async function postTask(userId) {
     const title = document.getElementById('title').value;
     const content = document.getElementById('content').value;
-    const selectedDifficulty = document.querySelector('input[name="difficulty"]:checked');
     const isCompleted = false;
-
-    let difficulty;
-    if (selectedDifficulty) {
-        difficulty = selectedDifficulty.value;
-    } else {
-        console.error('No difficulty selected!');
-        return;
-    }
 
     try {
         const response = await fetch(`http://localhost:3000/api/postTask`, {
@@ -168,7 +159,7 @@ async function postTask(userId) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title, content, difficulty, isCompleted,userId })
+            body: JSON.stringify({ title, content, isCompleted,userId })
         });
         const data = await response.json();
         document.getElementById('postResponse').innerText = JSON.stringify(data);
@@ -197,7 +188,7 @@ async function getTasks(userId) {
 
         incompleteTasks.forEach(task => {
             const listItem = document.createElement('li');
-            listItem.textContent = `Title:${task.title},  Content:${task.content},  Difficulty:${task.difficulty}`;
+            listItem.textContent = `Title:${task.title},  Content:${task.content}`;
             const completeButton = document.createElement('button')
             completeButton.className = 'complete-button'
             completeButton.innerHTML = '<i class="fas fa-check"></i>'
@@ -234,7 +225,7 @@ async function getCompletedTasks(userId) {
 
         completedTasks.forEach(task => {
             const listItem = document.createElement('li');
-            listItem.textContent = `Title: ${task.title}, Content: ${task.content}, Difficulty: ${task.difficulty}`;
+            listItem.textContent = `Title: ${task.title}, Content: ${task.content}`;
 
             const deleteButton = document.createElement('button');
             deleteButton.className = 'delete-button';
